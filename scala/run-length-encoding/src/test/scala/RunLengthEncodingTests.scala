@@ -4,6 +4,7 @@ import org.scalatest.Matchers
 class RunLengthEncodingTests extends FunSuite with Matchers {
 
   test("encode empty string") {
+    pending
     RunLengthEncoding.encode("") should be ("")
   }
 
@@ -23,7 +24,6 @@ class RunLengthEncodingTests extends FunSuite with Matchers {
   }
 
   test("encode simple") {
-    pending
     RunLengthEncoding.encode("AABBBCCCC") should be ("2A3B4C")
   }
 
