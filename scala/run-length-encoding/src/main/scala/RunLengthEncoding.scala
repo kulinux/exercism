@@ -1,7 +1,5 @@
 object RunLengthEncoding {
 
-
-
   def encode(str: String): String = {
     str.foldRight("") {(elem, res) =>
 
@@ -18,5 +16,14 @@ object RunLengthEncoding {
   }
 
 
-  def decode(str: String): String = str
+  def decode(str: String): String = str.foldRight(""){
+    (elem, res) =>
+      if (res.isEmpty) elem.toString
+      if (res.size == 1 && elem.isDigit) res * elem.asDigit
+      else if (res.size == 1 && !elem.isDigit) elem + res
+      else if (elem.isDigit && res.head == res.tail.head) res.head.toString * (10 * elem.asDigit) + res
+      else if (elem.isDigit) res.head.toString * elem.asDigit + res.tail
+      else elem + res
+  }
+     
 }
