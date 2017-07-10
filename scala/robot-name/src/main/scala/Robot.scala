@@ -3,11 +3,13 @@ object Robot {
 	val names = (1 to 676000).toStream map (x => nextRandom(random, x))
 	var globalCount = 0
 
+	def randomChr() = ('A' + random.nextInt('Z' - 'A')).toChar
+
+	val start = randomChr() + randomChr() 
+
 	def nextRandom(random : scala.util.Random, i : Int) = {
-		def randomChr() = ('A' + random.nextInt('Z' - 'A')).toChar
 		"" +
-			randomChr() +
-			randomChr() +
+			start
 			"%03d".format(i)
 	}
 }
@@ -28,8 +30,5 @@ class Robot {
 		count = globalCount
 		globalCount = globalCount + 1
 	}
-
-
-
 
 }
