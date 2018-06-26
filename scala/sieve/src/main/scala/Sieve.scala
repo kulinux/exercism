@@ -19,22 +19,16 @@ object Sieve {
   }
 
   def passOne(primes: Seq[(Int, Mark)]) : Seq[(Int, Mark)] = {
-    val maybePrime = primes
+    primes
       .find( _._2 == MaybePrime )
       .map( _._1 )
-
-    if(maybePrime.isDefined) {
-      val nextSeq = mark(primes, maybePrime.get)
-      passOne(nextSeq)
-    } else {
-      primes
-    }
+      .map( x => passOne( mark(primes, x) ) )
+      .getOrElse( primes )
   }
 
   def primes(limit: Int) : List[Int] = {
-    val range : Seq[Int] = 2 to limit toSeq
-    val a = range.map((_, MaybePrime))
-    val res = passOne(a)
+    val initData = 2 to limit map( (_, MaybePrime) )
+    val res = passOne(initData)
 
     res
       .filter(_._2 == Prime)
